@@ -5,21 +5,21 @@ import { TrendingUp, Info, Eye, EyeOff } from 'lucide-react';
 
 // Backend integration point: fetch 7-day forecast from model prediction API
 const forecastData = [
-  { day: 'Mar 27', date: 'Day 0', rf: 3241, transformer: 3241, tcn: 3241, observed: 3241 },
-  { day: 'Mar 28', date: 'Day 1', rf: 3680, transformer: 3720, tcn: 3655, observed: null },
-  { day: 'Mar 29', date: 'Day 2', rf: 4120, transformer: 4280, tcn: 4050, observed: null },
-  { day: 'Mar 30', date: 'Day 3', rf: 4850, transformer: 5100, tcn: 4780, observed: null },
-  { day: 'Mar 31', date: 'Day 4', rf: 5340, transformer: 5847, tcn: 5210, observed: null },
-  { day: 'Apr 01', date: 'Day 5', rf: 5120, transformer: 5480, tcn: 4990, observed: null },
-  { day: 'Apr 02', date: 'Day 6', rf: 4540, transformer: 4820, tcn: 4410, observed: null },
-  { day: 'Apr 03', date: 'Day 7', rf: 3890, transformer: 4050, tcn: 3760, observed: null },
+  { day: 'Jan 01', date: 'Day 0', rf: 0.198, transformer: 0.002, tcn: 0.007, observed: null },
+  { day: 'Jan 02', date: 'Day 1', rf: 0.234, transformer: 0.002, tcn: 0.006, observed: null },
+  { day: 'Jan 03', date: 'Day 2', rf: 0.266, transformer: 0.002, tcn: 0.006, observed: null },
+  { day: 'Jan 04', date: 'Day 3', rf: 0.288, transformer: 0.002, tcn: 0.006, observed: null },
+  { day: 'Jan 05', date: 'Day 4', rf: 0.307, transformer: 0.002, tcn: 0.005, observed: null },
+  { day: 'Jan 06', date: 'Day 5', rf: 0.324, transformer: 0.002, tcn: 0.006, observed: null },
+  { day: 'Jan 07', date: 'Day 6', rf: 0.334, transformer: 0.002, tcn: 0.006, observed: null },
+  
 ];
 
 const THRESHOLDS = {
-  watch: 3000,
-  warning: 4000,
-  danger: 5000,
-  extreme: 6500,
+  watch: 0.3,
+  warning: 0.45,
+  danger: 0.6,
+  extreme: 0.7,
 };
 
 const MODEL_COLORS = {
@@ -65,7 +65,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
             </span>
           </div>
           <span className="text-[12px] font-mono font-semibold tabular-nums text-[hsl(210,40%,92%)]">
-            {entry.value != null ? `${entry.value.toLocaleString()} m³/s` : '—'}
+            {entry.value != null ? `${entry.value.toLocaleString()} ` : '—'}
           </span>
         </div>
       ))}
@@ -109,9 +109,9 @@ export default function ForecastChart() {
               7-Day Flood Discharge Forecast
             </h2>
           </div>
-          <p className="text-[12px] text-[hsl(215,20%,55%)]">
+          {/* <p className="text-[12px] text-[hsl(215,20%,55%)]">
             Karnali River at Chisapani · 28 Mar – 03 Apr 2026 · Discharge in m³/s
-          </p>
+          </p> */}
         </div>
 
         {/* Model toggle buttons */}
@@ -190,8 +190,8 @@ export default function ForecastChart() {
             tick={{ fill: 'hsl(215,20%,55%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
-            tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`}
-            domain={[0, 7500]}
+            tickFormatter={(v) => `${(v)}`}
+            domain={[0, 0.5]}
           />
           <Tooltip content={<CustomTooltip />} />
 

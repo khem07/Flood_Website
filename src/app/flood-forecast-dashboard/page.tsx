@@ -22,13 +22,13 @@ export default function FloodForecastDashboard() {
         <DistrictRiskTable />
         <KPICards />
         <ForecastChart />
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <ObservedVsPredictedChart />
+        <div className="grid grid-cols-1 xl:grid-cols-1 gap-6">
+         
           <ModelComparisonBarChart />
         </div>
         <ModelPerformanceTable />
       </main>
-      <DashboardFooter />
+      {/* <DashboardFooter /> */}
     </div>
   );
 }

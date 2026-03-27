@@ -45,7 +45,7 @@ export default function DashboardTopbar() {
               { label: 'Forecast', href: '#forecast' },
               { label: 'Analysis', href: '#analysis' },
               { label: 'Performance', href: '#performance' },
-              { label: 'Research Notes', href: '#notes' },
+              
             ]?.map((item) => (
               <a
                 key={`nav-${item?.label}`}
@@ -93,7 +93,7 @@ export default function DashboardTopbar() {
               { label: 'Forecast', href: '#forecast' },
               { label: 'Analysis', href: '#analysis' },
               { label: 'Performance', href: '#performance' },
-              { label: 'Research Notes', href: '#notes' },
+             
             ]?.map((item) => (
               <a
                 key={`mobile-nav-${item?.label}`}
