@@ -6,34 +6,34 @@ import { BarChart3 } from 'lucide-react';
 // Real performance metrics from research results
 const metricsData = {
   weightedF1: [
-    { model: 'Random Forest', value: 0.8569, ciLower: 0.8471, ciUpper: 0.8667, color: '#9ca3af' },
-    { model: 'Transformer',   value: 0.8396, ciLower: 0.8291, ciUpper: 0.8510, color: '#6b7280' },
-    { model: 'TCN',           value: 0.8642, ciLower: 0.8537, ciUpper: 0.8746, color: '#4b5563' },
+    { model: 'Random Forest', value: 0.8569, ciLower: 0.8471, ciUpper: 0.8667, color: '#6b8dd4' },
+    { model: 'Transformer',   value: 0.8396, ciLower: 0.8291, ciUpper: 0.8510, color: '#78b957' },
+    { model: 'TCN',           value: 0.8642, ciLower: 0.8537, ciUpper: 0.8746, color: '#d4a43e' },
   ],
   accuracy: [
-    { model: 'Random Forest', value: 0.8569, ciLower: 0.8465, ciUpper: 0.8673, color: '#9ca3af' },
-    { model: 'Transformer',   value: 0.8405, ciLower: 0.8299, ciUpper: 0.8518, color: '#6b7280' },
-    { model: 'TCN',           value: 0.8652, ciLower: 0.8558, ciUpper: 0.8750, color: '#4b5563' },
+    { model: 'Random Forest', value: 0.8569, ciLower: 0.8465, ciUpper: 0.8673, color: '#6b8dd4' },
+    { model: 'Transformer',   value: 0.8405, ciLower: 0.8299, ciUpper: 0.8518, color: '#78b957' },
+    { model: 'TCN',           value: 0.8652, ciLower: 0.8558, ciUpper: 0.8750, color: '#d4a43e' },
   ],
   mcc: [
-    { model: 'Random Forest', value: 0.8094, ciLower: 0.7951, ciUpper: 0.8233, color: '#9ca3af' },
-    { model: 'Transformer',   value: 0.7877, ciLower: 0.7738, ciUpper: 0.8019, color: '#6b7280' },
-    { model: 'TCN',           value: 0.8204, ciLower: 0.8066, ciUpper: 0.8343, color: '#4b5563' },
+    { model: 'Random Forest', value: 0.8094, ciLower: 0.7951, ciUpper: 0.8233, color: '#6b8dd4' },
+    { model: 'Transformer',   value: 0.7877, ciLower: 0.7738, ciUpper: 0.8019, color: '#78b957' },
+    { model: 'TCN',           value: 0.8204, ciLower: 0.8066, ciUpper: 0.8343, color: '#d4a43e' },
   ],
   meanF1: [
-    { model: 'Random Forest', value: 0.8570, ciLower: 0.8292, ciUpper: 0.8848, color: '#9ca3af' },
-    { model: 'Transformer',   value: 0.8410, ciLower: 0.7720, ciUpper: 0.9100, color: '#6b7280' },
-    { model: 'TCN',           value: 0.8652, ciLower: 0.7794, ciUpper: 0.9510, color: '#4b5563' },
+    { model: 'Random Forest', value: 0.8570, ciLower: 0.8292, ciUpper: 0.8848, color: '#6b8dd4' },
+    { model: 'Transformer',   value: 0.8410, ciLower: 0.7720, ciUpper: 0.9100, color: '#78b957' },
+    { model: 'TCN',           value: 0.8652, ciLower: 0.7794, ciUpper: 0.9510, color: '#d4a43e' },
   ],
 };
 
 type MetricKey = keyof typeof metricsData;
 
 const metricMeta: Record<MetricKey, { label: string; description: string }> = {
-  weightedF1: { label: 'Weighted F1', description: 'Weighted F1-Score with 95% bootstrap CI — higher is better' },
-  accuracy:   { label: 'Accuracy',    description: 'Classification accuracy with 95% bootstrap CI — higher is better' },
-  mcc:        { label: 'MCC',         description: 'Matthews Correlation Coefficient with 95% bootstrap CI — higher is better' },
-  meanF1:     { label: 'Mean F1 CV',  description: '5-fold CV mean F1-Score (±Std shown as error bars) — higher is better' },
+  weightedF1: { label: 'Weighted F1', description: 'Weighted F1-Score with 95% bootstrap CI - higher is better' },
+  accuracy:   { label: 'Accuracy',    description: 'Classification accuracy with 95% bootstrap CI - higher is better' },
+  mcc:        { label: 'MCC',         description: 'Matthews Correlation Coefficient with 95% bootstrap CI - higher is better' },
+  meanF1:     { label: 'Mean F1 CV',  description: '5-fold CV mean F1-Score (±Std shown as error bars) - higher is better' },
 };
 
 interface CustomTooltipProps {
@@ -83,7 +83,6 @@ export default function ModelComparisonBarChart() {
       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <BarChart3 size={15} className="text-primary" />
             <h3 className="text-[14px] font-semibold text-foreground">
               Model Performance Comparison
             </h3>
@@ -99,7 +98,7 @@ export default function ModelComparisonBarChart() {
               className="px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-all duration-150"
               style={
                 activeMetric === key
-                  ? { background: '#6b728020', color: '#6b7280', border: '1px solid #6b728040' }
+                  ? { background: '#78b95720', color: '#78b957', border: '1px solid #78b95740' }
                   : { color: 'hsl(var(--color-muted-foreground))', border: '1px solid transparent' }
               }
             >

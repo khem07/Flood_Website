@@ -34,7 +34,7 @@ const kpiData = [
     subValue: 'TCN · 95% CI [0.8066, 0.8343]',
     status: 'good',
     icon: Activity,
-    description: "Matthews Correlation Coefficient — balanced metric for all classes",
+    description: "Matthews Correlation Coefficient - balanced metric for all classes",
     threshold: 'RF: 0.8094 · TF: 0.7877 · TCN: 0.8204',
   },
   {
@@ -56,7 +56,7 @@ const kpiData = [
     subValue: 'RF & TCN · Support: 1085–1145',
     status: 'good',
     icon: Zap,
-    description: 'F1-score for High Risk class — critical for flood early warning',
+    description: 'F1-score for High Risk class - critical for flood early warning',
     threshold: 'RF: 0.92 · TF: 0.90 · TCN: 0.92',
   },
   {

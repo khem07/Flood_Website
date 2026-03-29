@@ -32,7 +32,7 @@ const notes = [
     title: 'Key Findings',
     color: '#a1aab8',
     content:
-      'TCN achieved the best overall performance with Weighted F1: 0.8642, Accuracy: 0.8652, and MCC: 0.8204 (bootstrap 95% CI). Random Forest followed closely with Weighted F1: 0.8569 and MCC: 0.8094. Transformer scored Weighted F1: 0.8396 and MCC: 0.7877. All models classified the current 7-day forecast as No Risk across all lead days. High Risk class F1 reached 0.92 for RF and TCN, 0.90 for Transformer — critical for early warning reliability. 5-fold temporal CV (2009–2023) confirmed consistent generalization across all periods.',
+      'TCN achieved the best overall performance with Weighted F1: 0.8642, Accuracy: 0.8652, and MCC: 0.8204 (bootstrap 95% CI). Random Forest followed closely with Weighted F1: 0.8569 and MCC: 0.8094. Transformer scored Weighted F1: 0.8396 and MCC: 0.7877. All models classified the current 7-day forecast as No Risk across all lead days. High Risk class F1 reached 0.92 for RF and TCN, 0.90 for Transformer - critical for early warning reliability. 5-fold temporal CV (2009–2023) confirmed consistent generalization across all periods.',
   },
   {
     id: 'note-limitations',

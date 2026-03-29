@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'KarnaliFloodWatch — 7-Day ML Flood Forecast Dashboard',
+  title: 'KarnaliFloodWatch - 7-Day ML Flood Forecast Dashboard',
   description:
     'Research dashboard comparing Random Forest, Transformer, and TCN models for flood forecasting in the Karnali River basin, Nepal.',
   icons: {

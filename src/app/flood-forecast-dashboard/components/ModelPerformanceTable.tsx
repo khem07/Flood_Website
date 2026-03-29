@@ -132,7 +132,6 @@ export default function ModelPerformanceTable() {
     >
       {/* Header */}
       <div className="flex items-center gap-2 mb-4 flex-wrap">
-        <Award size={15} className="text-primary" />
         <h3 className="text-[14px] font-semibold text-foreground">
           Model Performance Metrics
         </h3>
@@ -272,7 +271,7 @@ export default function ModelPerformanceTable() {
                           <span className="font-mono font-medium text-[11px]" style={{ color: m.color }}>{m.model}</span>
                         </div>
                       ) : (
-                        <span className="text-muted-foreground/50">—</span>
+                        <span className="text-muted-foreground/50">-</span>
                       )}
                     </td>
                     <td className="py-2.5 px-2 text-right font-mono text-muted-foreground">{row.metric}</td>

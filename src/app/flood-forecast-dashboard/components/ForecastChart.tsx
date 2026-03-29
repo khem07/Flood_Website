@@ -23,10 +23,10 @@ const THRESHOLDS = {
 };
 
 const MODEL_COLORS = {
-  rf: '#9ca3af',
-  transformer: '#6b7280',
-  tcn: '#4b5563',
-  observed: '#a1aab8',
+  rf: '#6b8dd4',
+  transformer: '#78b957',
+  tcn: '#d4a43e',
+  observed: '#a97ba7',
 };
 
 const MODEL_LABELS = {
@@ -65,7 +65,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
             </span>
           </div>
           <span className="text-[12px] font-mono font-semibold tabular-nums text-foreground">
-            {entry.value != null ? `${entry.value.toLocaleString()} ` : '—'}
+            {entry.value != null ? `${entry.value.toLocaleString()} ` : '-'}
           </span>
         </div>
       ))}
@@ -104,7 +104,6 @@ export default function ForecastChart() {
       <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <TrendingUp size={16} className="text-primary" />
             <h2 className="text-[15px] font-semibold text-foreground">
               7-Day Flood Forecast
             </h2>
@@ -163,20 +162,20 @@ export default function ForecastChart() {
         <AreaChart data={forecastData} margin={{ top: 10, right: 20, left: 10, bottom: 0 }}>
           <defs>
             <linearGradient id="rfGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#9ca3af" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#9ca3af" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#6b8dd4" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#6b8dd4" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="transformerGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#6b7280" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#6b7280" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#78b957" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#78b957" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="tcnGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4b5563" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#4b5563" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#d4a43e" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#d4a43e" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="obsGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#a1aab8" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#a1aab8" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#a97ba7" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#a97ba7" stopOpacity={0.02} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--color-border))" />
@@ -228,10 +227,10 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="observed"
-              stroke="#a1aab8"
+              stroke="#a97ba7"
               strokeWidth={2.5}
               fill="url(#obsGrad)"
-              dot={{ fill: '#a1aab8', r: 4, strokeWidth: 0 }}
+              dot={{ fill: '#a97ba7', r: 4, strokeWidth: 0 }}
               connectNulls={false}
             />
           )}
@@ -239,7 +238,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="rf"
-              stroke="#9ca3af"
+              stroke="#6b8dd4"
               strokeWidth={2}
               fill="url(#rfGrad)"
               strokeDasharray="6 3"
@@ -250,7 +249,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="transformer"
-              stroke="#6b7280"
+              stroke="#78b957"
               strokeWidth={2}
               fill="url(#transformerGrad)"
               dot={false}
@@ -260,7 +259,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="tcn"
-              stroke="#4b5563"
+              stroke="#d4a43e"
               strokeWidth={2}
               fill="url(#tcnGrad)"
               strokeDasharray="3 3"

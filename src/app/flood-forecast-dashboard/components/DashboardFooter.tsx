@@ -84,7 +84,7 @@ export default function DashboardFooter() {
             <div className="flex items-center gap-1.5">
               <Shield size={11} className="text-muted-foreground" />
               <span className="text-[10px] font-mono text-muted-foreground">
-                Research use only — not for emergency response
+                Research use only - not for emergency response
               </span>
             </div>
           </div>

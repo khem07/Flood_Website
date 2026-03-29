@@ -87,7 +87,6 @@ export default function ForecastTable() {
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Table2 size={15} className="text-primary" />
             <h3 className="text-[14px] font-semibold text-foreground">
               7-Day Flood Probability Forecast
             </h3>

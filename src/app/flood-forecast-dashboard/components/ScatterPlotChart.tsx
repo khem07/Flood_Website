@@ -79,7 +79,7 @@ export default function ScatterPlotChart() {
           <div className="flex items-center gap-2 mb-1">
             <Crosshair size={15} className="text-primary" />
             <h3 className="text-[14px] font-semibold text-foreground">
-              Scatter Plot — Obs vs Pred
+              Scatter Plot - Obs vs Pred
             </h3>
           </div>
           <p className="text-[11px] text-muted-foreground font-mono">

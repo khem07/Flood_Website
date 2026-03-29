@@ -144,10 +144,16 @@ export default function DistrictRiskTable() {
       </div>
 
       {/* Summary row */}
-      <div className="mt-4 grid grid-cols-3 gap-3">
+      <div className="mt-4 grid grid-cols-4 gap-3">
         <div className="p-3 rounded-lg bg-muted/20 border border-border">
           <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Total Districts</p>
           <p className="text-[20px] font-bold  font-mono">{districts.length}</p>
+        </div>
+        <div className="p-3 rounded-lg bg-muted/20 border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Very High Risk</p>
+          <p className="text-[20px] font-bold font-mono">
+            {districts.filter((d) => d.riskLevel === 'VeryHigh').length}
+          </p>
         </div>
         <div className="p-3 rounded-lg bg-muted/20 border border-border">
           <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">High Risk</p>

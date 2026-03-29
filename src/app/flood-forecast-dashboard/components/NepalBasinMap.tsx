@@ -8,9 +8,8 @@ export default function NepalBasinMap() {
   return (
     <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center gap-2 mb-4">
-        <MapPin size={15} className="text-primary" />
         <h3 className="text-[15px] font-semibold text-foreground">
-          Nepal — Karnali River Basin
+          Nepal - Karnali River Basin
         </h3>
         <span className="ml-auto text-[11px] font-mono text-muted-foreground">
           Study Area · ~45,000 km²
@@ -51,7 +50,6 @@ export default function NepalBasinMap() {
           onClick={() => setShowModal(true)}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 border border-primary text-primary text-[13px] font-semibold hover:bg-primary/20 transition-all duration-200"
         >
-          <ZoomIn size={14} />
           Open QGIS Risk Mapping
         </button>
       </div>
@@ -65,9 +63,8 @@ export default function NepalBasinMap() {
           <div className="relative w-full max-w-3xl rounded-2xl border border-border bg-card shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-border">
               <div className="flex items-center gap-2">
-                <MapPin size={15} className="text-primary" />
                 <h4 className="text-[14px] font-semibold text-foreground">
-                  Karnali Basin — QGIS Flood Risk Map
+                  Karnali Basin - QGIS Flood Risk Map
                 </h4>
               </div>
               <button
