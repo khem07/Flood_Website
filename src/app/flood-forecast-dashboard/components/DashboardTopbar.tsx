@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Droplets, Bell, Download, Menu, X, MapPin, Clock } from 'lucide-react';
+import Image from 'next/image';
 import { toast } from 'sonner';
 
 export default function DashboardTopbar() {
@@ -18,6 +19,13 @@ export default function DashboardTopbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo + Brand */}
           <div className="flex items-center gap-3">
+            <Image
+              src="/assets/flood_logo.png"
+              alt="Karnali Flood Risk Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-[15px] tracking-tight text-foreground">

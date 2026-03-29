@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Research dashboard comparing Random Forest, Transformer, and TCN models for flood forecasting in the Karnali River basin, Nepal.',
   icons: {
-    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+    icon: [{ url: '/assets/flood_logo.png', type: 'image/png' }],
   },
 };
 
