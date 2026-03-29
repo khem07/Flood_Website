@@ -2,33 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
-    --card: 222 40% 9%;
-    --card-foreground: 210 40% 96%;
-    --popover: 222 40% 9%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 96%;
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 217 32% 17%;
-    --accent-foreground: 210 40% 96%;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+    --primary: 209 89% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 40%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 70%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 209 89% 44%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 199 89% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 88%;
+    --input: 0 0% 96%;
+    --ring: 209 89% 44%;
     --radius: 0.5rem;
     --warning: 38 92% 50%;
     --danger: 0 84% 60%;
     --success: 142 71% 45%;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }
 
@@ -39,8 +43,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'IBM Plex Sans', sans-serif;
-    background-color: hsl(222, 47%, 6%);
-    color: hsl(210, 40%, 96%);
+    background-color: hsl(0, 0%, 98%);
+    color: hsl(0, 0%, 15%);
   }
   .font-mono {
     font-family: 'IBM Plex Mono', monospace;

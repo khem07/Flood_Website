@@ -56,17 +56,17 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload || !payload.length) return null;
   return (
-    <div className="bg-[hsl(222,40%,10%)] border border-[hsl(217,32%,22%)] rounded-xl p-3 shadow-2xl">
-      <p className="text-[11px] font-mono text-[hsl(215,20%,55%)] mb-2 pb-2 border-b border-[hsl(217,32%,17%)]">
+    <div className="bg-card border border-border rounded-xl p-3 shadow-2xl">
+      <p className="text-[11px] font-mono text-muted-foreground mb-2 pb-2 border-b border-border">
         {label}
       </p>
       {payload.map((entry) => (
         <div key={`ovp-tt-${entry.name}`} className="flex items-center justify-between gap-4 mb-1">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full" style={{ background: entry.color }} />
-            <span className="text-[11px] text-[hsl(215,20%,65%)] capitalize">{entry.name}</span>
+            <span className="text-[11px] text-muted-foreground capitalize">{entry.name}</span>
           </div>
-          <span className="text-[12px] font-mono tabular-nums font-semibold text-[hsl(210,40%,92%)]">
+          <span className="text-[12px] font-mono tabular-nums font-semibold text-foreground">
             {entry.value.toLocaleString()} m³/s
           </span>
         </div>
@@ -84,18 +84,17 @@ export default function ObservedVsPredictedChart() {
 
   return (
     <div
-      id="analysis"
-      className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5"
+      className="rounded-xl border border-border bg-card p-5"
     >
       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <GitCompare size={15} className="text-[hsl(199,89%,48%)]" />
-            <h3 className="text-[14px] font-semibold text-[hsl(210,40%,96%)]">
+            <GitCompare size={15} className="text-primary" />
+            <h3 className="text-[14px] font-semibold text-foreground">
               Observed vs Predicted
             </h3>
           </div>
-          <p className="text-[11px] text-[hsl(215,20%,55%)] font-mono">
+          <p className="text-[11px] text-muted-foreground font-mono">
             Historical validation · Chisapani gauge · Weekly aggregated
           </p>
         </div>
@@ -103,7 +102,7 @@ export default function ObservedVsPredictedChart() {
         <div className="relative">
           <button
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[12px] font-mono text-[hsl(215,20%,75%)] bg-[hsl(217,32%,13%)] border border-[hsl(217,32%,22%)] hover:border-[hsl(217,32%,30%)] transition-all duration-150"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[12px] font-mono text-muted-foreground bg-muted/20 border border-border hover:border-border/80 transition-all duration-150"
           >
             {currentLabel}
             
@@ -114,15 +113,15 @@ export default function ObservedVsPredictedChart() {
 
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={currentData} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(217,32%,16%)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--color-border))" />
           <XAxis
             dataKey="date"
-            tick={{ fill: 'hsl(215,20%,50%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: 'hsl(215,20%,50%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
@@ -131,15 +130,15 @@ export default function ObservedVsPredictedChart() {
           <Line
             type="monotone"
             dataKey="observed"
-            stroke="#34d399"
+            stroke="#9ca3af"
             strokeWidth={2.5}
-            dot={{ r: 3, fill: '#34d399', strokeWidth: 0 }}
+            dot={{ r: 3, fill: '#9ca3af', strokeWidth: 0 }}
             name="observed"
           />
           <Line
             type="monotone"
             dataKey="rf"
-            stroke="#38bdf8"
+            stroke="#9ca3af"
             strokeWidth={1.5}
             strokeDasharray="5 3"
             dot={false}
@@ -148,7 +147,7 @@ export default function ObservedVsPredictedChart() {
           <Line
             type="monotone"
             dataKey="transformer"
-            stroke="#f59e0b"
+            stroke="#6b7280"
             strokeWidth={1.5}
             dot={false}
             name="transformer"
@@ -156,7 +155,7 @@ export default function ObservedVsPredictedChart() {
           <Line
             type="monotone"
             dataKey="tcn"
-            stroke="#a78bfa"
+            stroke="#4b5563"
             strokeWidth={1.5}
             strokeDasharray="3 2"
             dot={false}
@@ -167,13 +166,13 @@ export default function ObservedVsPredictedChart() {
 
       <div className="mt-3 grid grid-cols-3 gap-2">
         {[
-          { model: 'Random Forest', r2: '0.891', bias: '-2.4%', color: '#38bdf8' },
-          { model: 'Transformer', r2: '0.924', bias: '+1.8%', color: '#f59e0b' },
-          { model: 'TCN', r2: '0.908', bias: '-1.1%', color: '#a78bfa' },
+          { model: 'Random Forest', r2: '0.891', bias: '-2.4%', color: '#9ca3af' },
+          { model: 'Transformer', r2: '0.924', bias: '+1.8%', color: '#6b7280' },
+          { model: 'TCN', r2: '0.908', bias: '-1.1%', color: '#4b5563' },
         ].map((m) => (
           <div
             key={`val-stat-${m.model}`}
-            className="text-center p-2 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]"
+            className="text-center p-2 rounded-lg bg-muted/20 border border-border"
           >
             <div
               className="text-[13px] font-mono font-semibold tabular-nums"
@@ -181,8 +180,8 @@ export default function ObservedVsPredictedChart() {
             >
               R² = {m.r2}
             </div>
-            <div className="text-[10px] text-[hsl(215,20%,55%)] mt-0.5">{m.model}</div>
-            <div className="text-[10px] font-mono text-[hsl(215,20%,45%)]">Bias: {m.bias}</div>
+            <div className="text-[10px] text-muted-foreground mt-0.5">{m.model}</div>
+            <div className="text-[10px] font-mono text-muted-foreground">Bias: {m.bias}</div>
           </div>
         ))}
       </div>

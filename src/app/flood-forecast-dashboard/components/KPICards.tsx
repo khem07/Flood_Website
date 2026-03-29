@@ -10,8 +10,6 @@ const kpiData = [
     value: '0.8642',
     unit: '',
     subValue: 'TCN · 95% CI [0.8537, 0.8746]',
-    trend: 'up',
-    trendValue: '+0.0246 vs Transformer',
     status: 'good',
     icon: Target,
     description: 'Highest weighted F1-score across all models (bootstrap CI)',
@@ -23,8 +21,6 @@ const kpiData = [
     value: '0.8652',
     unit: '',
     subValue: 'TCN · 95% CI [0.8558, 0.8750]',
-    trend: 'up',
-    trendValue: '+0.0247 vs Transformer',
     status: 'good',
     icon: BarChart3,
     description: 'Highest classification accuracy across 5-fold CV (TCN model)',
@@ -36,8 +32,6 @@ const kpiData = [
     value: '0.8204',
     unit: '',
     subValue: 'TCN · 95% CI [0.8066, 0.8343]',
-    trend: 'up',
-    trendValue: '+0.0327 vs Transformer',
     status: 'good',
     icon: Activity,
     description: "Matthews Correlation Coefficient — balanced metric for all classes",
@@ -49,8 +43,6 @@ const kpiData = [
     value: '7',
     unit: 'days',
     subValue: 'Day 1 – Day 7 lead time',
-    trend: 'neutral',
-    trendValue: 'All days: No Risk',
     status: 'info',
     icon: Calendar,
     description: 'Lead time window for all three ML model flood probability forecasts',
@@ -62,8 +54,6 @@ const kpiData = [
     value: '0.92',
     unit: '',
     subValue: 'RF & TCN · Support: 1085–1145',
-    trend: 'up',
-    trendValue: 'Best class performance',
     status: 'good',
     icon: Zap,
     description: 'F1-score for High Risk class — critical for flood early warning',
@@ -75,8 +65,6 @@ const kpiData = [
     value: 'No Risk',
     unit: '',
     subValue: 'All 3 models · All 7 days',
-    trend: 'down',
-    trendValue: 'RF max prob: 0.334',
     status: 'good',
     icon: Waves,
     description: 'Current 7-day flood risk classification from all three ML models',
@@ -86,40 +74,40 @@ const kpiData = [
 
 const statusConfig = {
   good: {
-    bg: 'bg-[hsl(142,71%,45%)]/10',
-    border: 'border-[hsl(142,71%,45%)]/20',
-    badge: 'bg-[hsl(142,71%,45%)]/15 text-[hsl(142,71%,55%)]',
-    value: 'text-[hsl(142,71%,55%)]',
+    bg: 'bg-muted/5',
+    border: 'border-muted/30',
+    badge: 'bg-muted/15 text-muted-foreground',
+    value: 'text-foreground',
   },
   warning: {
-    bg: 'bg-[hsl(38,92%,50%)]/8',
-    border: 'border-[hsl(38,92%,50%)]/25',
-    badge: 'bg-[hsl(38,92%,50%)]/15 text-[hsl(38,92%,55%)]',
-    value: 'text-[hsl(38,92%,55%)]',
+    bg: 'bg-muted/5',
+    border: 'border-muted/30',
+    badge: 'bg-muted/15 text-muted-foreground',
+    value: 'text-foreground',
   },
   watch: {
-    bg: 'bg-[hsl(38,92%,50%)]/6',
-    border: 'border-[hsl(38,92%,50%)]/20',
-    badge: 'bg-[hsl(38,92%,50%)]/10 text-[hsl(38,92%,65%)]',
-    value: 'text-[hsl(38,92%,65%)]',
+    bg: 'bg-muted/5',
+    border: 'border-muted/30',
+    badge: 'bg-muted/15 text-muted-foreground',
+    value: 'text-foreground',
   },
   danger: {
-    bg: 'bg-[hsl(0,84%,60%)]/8',
-    border: 'border-[hsl(0,84%,60%)]/25',
-    badge: 'bg-[hsl(0,84%,60%)]/15 text-[hsl(0,84%,65%)]',
-    value: 'text-[hsl(0,84%,65%)]',
+    bg: 'bg-muted/5',
+    border: 'border-muted/30',
+    badge: 'bg-muted/15 text-muted-foreground',
+    value: 'text-foreground',
   },
   info: {
-    bg: 'bg-[hsl(199,89%,48%)]/8',
-    border: 'border-[hsl(199,89%,48%)]/20',
-    badge: 'bg-[hsl(199,89%,48%)]/15 text-[hsl(199,89%,58%)]',
-    value: 'text-[hsl(199,89%,58%)]',
+    bg: 'bg-muted/5',
+    border: 'border-muted/30',
+    badge: 'bg-muted/15 text-muted-foreground',
+    value: 'text-foreground',
   },
 };
 
 export default function KPICards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-4">
+    <div id='analysis' className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-4">
       {kpiData.map((kpi, i) => {
         const IconComp = kpi.icon;
         const cfg = statusConfig[kpi.status as keyof typeof statusConfig];
@@ -134,16 +122,6 @@ export default function KPICards() {
               ${isFirst ? 'sm:col-span-2 lg:col-span-1 2xl:col-span-2' : ''}
             `}
           >
-            <div className="flex items-start justify-between mb-3">
-              <div
-                className="p-2 rounded-lg"
-                style={{ background: 'hsl(217,32%,17%)' }}
-              >
-                <IconComp size={16} className="text-[hsl(215,20%,65%)]" />
-              </div>
-              <TrendBadge trend={kpi.trend} value={kpi.trendValue} />
-            </div>
-
             <div className="mb-1">
               <div className="flex items-end gap-1">
                 <span
@@ -152,22 +130,22 @@ export default function KPICards() {
                   {kpi.value}
                 </span>
                 {kpi.unit && (
-                  <span className="text-[13px] text-[hsl(215,20%,55%)] mb-0.5 font-mono">
+                  <span className="text-[13px] text-muted-foreground mb-0.5 font-mono">
                     {kpi.unit}
                   </span>
                 )}
               </div>
             </div>
 
-            <p className="text-[12px] font-medium text-[hsl(210,40%,80%)] mb-0.5 leading-tight">
+            <p className="text-[12px] font-medium text-foreground mb-0.5 leading-tight">
               {kpi.label}
             </p>
-            <p className="text-[11px] text-[hsl(215,20%,55%)] font-mono leading-tight">
+            <p className="text-[11px] text-muted-foreground font-mono leading-tight">
               {kpi.subValue}
             </p>
 
-            <div className="mt-3 pt-3 border-t border-[hsl(217,32%,17%)]">
-              <p className="text-[10px] text-[hsl(215,20%,45%)] leading-tight">
+            <div className="mt-3 pt-3 border-t border-border">
+              <p className="text-[10px] text-muted-foreground leading-tight">
                 {kpi.threshold}
               </p>
             </div>
@@ -181,7 +159,7 @@ export default function KPICards() {
 function TrendBadge({ trend, value }: { trend: string; value: string }) {
   if (trend === 'up') {
     return (
-      <div className="flex items-center gap-0.5 text-[10px] font-mono text-[hsl(38,92%,55%)]">
+      <div className="flex items-center gap-0.5 text-[10px] font-mono text-muted-foreground">
         <ArrowUpRight size={12} />
         <span className="hidden xl:inline truncate max-w-[80px]">{value}</span>
       </div>
@@ -189,14 +167,14 @@ function TrendBadge({ trend, value }: { trend: string; value: string }) {
   }
   if (trend === 'down') {
     return (
-      <div className="flex items-center gap-0.5 text-[10px] font-mono text-[hsl(142,71%,55%)]">
+      <div className="flex items-center gap-0.5 text-[10px] font-mono text-muted-foreground">
         <ArrowDownRight size={12} />
         <span className="hidden xl:inline truncate max-w-[80px]">{value}</span>
       </div>
     );
   }
   return (
-    <div className="flex items-center gap-0.5 text-[10px] font-mono text-[hsl(215,20%,55%)]">
+    <div className="flex items-center gap-0.5 text-[10px] font-mono text-muted-foreground">
       <Minus size={12} />
     </div>
   );

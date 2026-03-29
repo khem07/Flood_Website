@@ -5,33 +5,33 @@ import { AlertTriangle, X, Info } from 'lucide-react';
 const WARNING_LEVELS = {
   EXTREME: {
     label: 'EXTREME DANGER',
-    color: 'hsl(0,84%,60%)',
-    bg: 'hsl(0,84%,60%,0.08)',
-    border: 'hsl(0,84%,60%,0.35)',
+    color: '#4b5563',
+    bg: 'rgba(75,85,99,0.08)',
+    border: 'rgba(75,85,99,0.35)',
     icon: AlertTriangle,
     pulse: true,
   },
   DANGER: {
     label: 'DANGER',
-    color: 'hsl(0,84%,60%)',
-    bg: 'rgba(239,68,68,0.08)',
-    border: 'rgba(239,68,68,0.35)',
+    color: '#4b5563',
+    bg: 'rgba(75,85,99,0.08)',
+    border: 'rgba(75,85,99,0.35)',
     icon: AlertTriangle,
     pulse: true,
   },
   WARNING: {
     label: 'FLOOD WARNING',
-    color: 'hsl(38,92%,50%)',
-    bg: 'rgba(245,158,11,0.08)',
-    border: 'rgba(245,158,11,0.35)',
+    color: '#6b7280',
+    bg: 'rgba(107,114,128,0.08)',
+    border: 'rgba(107,114,128,0.35)',
     icon: AlertTriangle,
     pulse: false,
   },
   WATCH: {
     label: 'FLOOD WATCH',
-    color: 'hsl(38,92%,65%)',
-    bg: 'rgba(251,191,36,0.06)',
-    border: 'rgba(251,191,36,0.25)',
+    color: '#9ca3af',
+    bg: 'rgba(156,163,175,0.06)',
+    border: 'rgba(156,163,175,0.25)',
     icon: Info,
     pulse: false,
   },
@@ -87,21 +87,21 @@ export default function WarningBanner() {
             >
               {config.label}
             </span>
-            <span className="text-[11px] font-mono text-[hsl(215,20%,55%)]">
+            <span className="text-[11px] font-mono text-muted-foreground">
               Issued: {CURRENT_WARNING.issuedAt}
             </span>
-            <span className="text-[11px] font-mono text-[hsl(215,20%,55%)]">
+            <span className="text-[11px] font-mono text-muted-foreground">
               Valid until: {CURRENT_WARNING.validUntil}
             </span>
           </div>
 
-          <p className="mt-1.5 text-[13px] text-[hsl(210,40%,88%)] leading-relaxed">
+          <p className="mt-1.5 text-[13px] text-foreground leading-relaxed">
             {CURRENT_WARNING.message}
           </p>
 
           <div className="mt-2.5 flex flex-wrap gap-4">
             <div>
-              <span className="text-[11px] text-[hsl(215,20%,55%)] uppercase tracking-wider font-mono">
+              <span className="text-[11px] text-muted-foreground uppercase tracking-wider font-mono">
                 Predicted Peak
               </span>
               <div
@@ -112,7 +112,7 @@ export default function WarningBanner() {
               </div>
             </div>
             <div>
-              <span className="text-[11px] text-[hsl(215,20%,55%)] uppercase tracking-wider font-mono">
+              <span className="text-[11px] text-muted-foreground uppercase tracking-wider font-mono">
                 Peak Day
               </span>
               <div
@@ -123,7 +123,7 @@ export default function WarningBanner() {
               </div>
             </div>
             <div>
-              <span className="text-[11px] text-[hsl(215,20%,55%)] uppercase tracking-wider font-mono">
+              <span className="text-[11px] text-muted-foreground uppercase tracking-wider font-mono">
                 Affected Districts
               </span>
               <div className="flex flex-wrap gap-1 mt-0.5">
@@ -146,7 +146,7 @@ export default function WarningBanner() {
 
         <button
           onClick={() => setDismissed(true)}
-          className="flex-shrink-0 p-1 rounded-md text-[hsl(215,20%,55%)] hover:text-[hsl(210,40%,96%)] hover:bg-[hsl(217,32%,17%)] transition-all duration-150"
+          className="flex-shrink-0 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-150"
           title="Dismiss warning banner"
         >
           <X size={16} />

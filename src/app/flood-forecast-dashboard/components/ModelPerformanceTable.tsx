@@ -6,7 +6,7 @@ import { Award } from 'lucide-react';
 const cvFolds = [
   {
     model: 'Random Forest',
-    color: '#38bdf8',
+    color: '#9ca3af',
     folds: [
       { fold: 1, period: '2009–2011', precision: 0.8295, recall: 0.8171, f1: 0.8111, accuracy: 0.8171, mcc: 0.7634, kappa: 0.7561 },
       { fold: 2, period: '2012–2014', precision: 0.8680, recall: 0.8641, f1: 0.8644, accuracy: 0.8641, mcc: 0.8187, kappa: 0.8177 },
@@ -18,7 +18,7 @@ const cvFolds = [
   },
   {
     model: 'Transformer',
-    color: '#f59e0b',
+    color: '#6b7280',
     folds: [
       { fold: 1, period: '2009–2011', precision: 0.796, recall: 0.751, f1: 0.732, accuracy: 0.751, mcc: 0.689, kappa: 0.668 },
       { fold: 2, period: '2012–2014', precision: 0.808, recall: 0.804, f1: 0.802, accuracy: 0.804, mcc: 0.740, kappa: 0.737 },
@@ -30,7 +30,7 @@ const cvFolds = [
   },
   {
     model: 'TCN',
-    color: '#a78bfa',
+    color: '#4b5563',
     folds: [
       { fold: 1, period: '2009–2011', precision: 0.7899, recall: 0.7455, f1: 0.7193, accuracy: 0.7455, mcc: 0.6814, kappa: 0.6593 },
       { fold: 2, period: '2012–2014', precision: 0.8788, recall: 0.8671, f1: 0.8691, accuracy: 0.8671, mcc: 0.8238, kappa: 0.8210 },
@@ -46,7 +46,7 @@ const cvFolds = [
 const perClassData = [
   {
     model: 'Random Forest',
-    color: '#38bdf8',
+    color: '#9ca3af',
     classes: [
       { name: 'No Risk',     precision: 0.88, recall: 0.91, f1: 0.89, support: 1015 },
       { name: 'Low Risk',    precision: 0.79, recall: 0.80, f1: 0.80, support: 1090 },
@@ -58,7 +58,7 @@ const perClassData = [
   },
   {
     model: 'Transformer',
-    color: '#f59e0b',
+    color: '#6b7280',
     classes: [
       { name: 'No Risk',     precision: 0.83, recall: 0.92, f1: 0.87, support: 1015 },
       { name: 'Low Risk',    precision: 0.80, recall: 0.76, f1: 0.78, support: 1090 },
@@ -70,7 +70,7 @@ const perClassData = [
   },
   {
     model: 'TCN',
-    color: '#a78bfa',
+    color: '#4b5563',
     classes: [
       { name: 'No Risk',     precision: 0.85, recall: 0.92, f1: 0.89, support: 1016 },
       { name: 'Low Risk',    precision: 0.83, recall: 0.76, f1: 0.79, support: 1124 },
@@ -86,7 +86,7 @@ const perClassData = [
 const bootstrapData = [
   {
     model: 'Random Forest',
-    color: '#38bdf8',
+    color: '#9ca3af',
     metrics: [
       { metric: 'Weighted F1', point: 0.8569, ciLower: 0.8471, ciUpper: 0.8667, ciWidth: 0.0196 },
       { metric: 'Accuracy',    point: 0.8569, ciLower: 0.8465, ciUpper: 0.8673, ciWidth: 0.0208 },
@@ -95,7 +95,7 @@ const bootstrapData = [
   },
   {
     model: 'Transformer',
-    color: '#f59e0b',
+    color: '#6b7280',
     metrics: [
       { metric: 'Weighted F1', point: 0.8396, ciLower: 0.8291, ciUpper: 0.8510, ciWidth: 0.0219 },
       { metric: 'Accuracy',    point: 0.8405, ciLower: 0.8299, ciUpper: 0.8518, ciWidth: 0.0219 },
@@ -104,7 +104,7 @@ const bootstrapData = [
   },
   {
     model: 'TCN',
-    color: '#a78bfa',
+    color: '#4b5563',
     metrics: [
       { metric: 'Weighted F1', point: 0.8642, ciLower: 0.8537, ciUpper: 0.8746, ciWidth: 0.0209 },
       { metric: 'Accuracy',    point: 0.8652, ciLower: 0.8558, ciUpper: 0.8750, ciWidth: 0.0192 },
@@ -128,24 +128,25 @@ export default function ModelPerformanceTable() {
   return (
     <div
       id="performance"
-      className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5"
+      className="rounded-xl border border-border bg-card p-5"
     >
       {/* Header */}
       <div className="flex items-center gap-2 mb-4 flex-wrap">
-        <Award size={15} className="text-[hsl(199,89%,48%)]" />
-        <h3 className="text-[14px] font-semibold text-[hsl(210,40%,96%)]">
+        <Award size={15} className="text-primary" />
+        <h3 className="text-[14px] font-semibold text-foreground">
           Model Performance Metrics
         </h3>
-        <div className="ml-auto flex items-center gap-1 bg-[hsl(217,32%,11%)] rounded-lg p-1 border border-[hsl(217,32%,17%)]">
+        <div className="ml-auto flex items-center gap-1 bg-muted/20 rounded-lg p-1 border border-border">
           {tabs.map((t) => (
             <button
               key={t.key}
               onClick={() => setActiveTab(t.key)}
-              className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-medium transition-all duration-150 ${
+              className="px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-all duration-150"
+              style={
                 activeTab === t.key
-                  ? 'bg-[hsl(199,89%,48%)]/20 text-[hsl(199,89%,58%)] border border-[hsl(199,89%,48%)]/30'
-                  : 'text-[hsl(215,20%,55%)] hover:text-[hsl(210,40%,80%)]'
-              }`}
+                  ? { background: '#6b728020', color: '#6b7280', border: '1px solid #6b728040' }
+                  : { color: 'hsl(var(--color-muted-foreground))', border: '1px solid transparent' }
+              }
             >
               {t.label}
             </button>
@@ -164,7 +165,7 @@ export default function ModelPerformanceTable() {
               style={
                 activeModel === i
                   ? { background: `${m.color}20`, color: m.color, border: `1px solid ${m.color}40` }
-                  : { color: 'hsl(215,20%,55%)', border: '1px solid transparent' }
+                  : { color: 'hsl(var(--color-muted-foreground))', border: '1px solid transparent' }
               }
             >
               <span className="w-2 h-2 rounded-sm" style={{ background: m.color }} />
@@ -179,9 +180,9 @@ export default function ModelPerformanceTable() {
         <div className="overflow-x-auto">
           <table className="w-full text-[11px] min-w-[560px]">
             <thead>
-              <tr className="border-b border-[hsl(217,32%,17%)]">
+              <tr className="border-b border-border">
                 {['Fold', 'Period', 'Precision', 'Recall', 'F1-Score', 'Accuracy', 'MCC', 'Kappa'].map((h) => (
-                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-[hsl(215,20%,50%)] uppercase tracking-wider">
+                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                     {h}
                   </th>
                 ))}
@@ -189,20 +190,20 @@ export default function ModelPerformanceTable() {
             </thead>
             <tbody>
               {cvFolds[activeModel].folds.map((row) => (
-                <tr key={`cv-${row.fold}`} className="border-b border-[hsl(217,32%,13%)] hover:bg-[hsl(217,32%,11%)] transition-colors">
-                  <td className="py-2.5 px-2 font-mono text-[hsl(215,20%,65%)]">{row.fold}</td>
-                  <td className="py-2.5 px-2 font-mono text-[hsl(215,20%,55%)]">{row.period}</td>
+                <tr key={`cv-${row.fold}`} className="border-b border-muted/20 hover:bg-muted transition-colors">
+                  <td className="py-2.5 px-2 font-mono text-muted-foreground">{row.fold}</td>
+                  <td className="py-2.5 px-2 font-mono text-muted-foreground">{row.period}</td>
                   {[row.precision, row.recall, row.f1, row.accuracy, row.mcc, row.kappa].map((v, vi) => (
-                    <td key={vi} className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(210,40%,80%)]">
+                    <td key={vi} className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">
                       {v.toFixed(4)}
                     </td>
                   ))}
                 </tr>
               ))}
               {/* Mean ± Std row */}
-              <tr className="border-t-2 border-[hsl(217,32%,22%)]" style={{ background: `${cvFolds[activeModel].color}08` }}>
+              <tr className="border-t-2 border-border" style={{ background: `${cvFolds[activeModel].color}08` }}>
                 <td className="py-2.5 px-2 font-mono font-semibold" style={{ color: cvFolds[activeModel].color }}>Mean</td>
-                <td className="py-2.5 px-2 font-mono text-[hsl(215,20%,45%)]">±Std</td>
+                <td className="py-2.5 px-2 font-mono text-muted-foreground">±Std</td>
                 {(['precision', 'recall', 'f1', 'accuracy', 'mcc', 'kappa'] as const).map((k) => (
                   <td key={k} className="py-2.5 px-2 text-right font-mono tabular-nums text-[11px]" style={{ color: cvFolds[activeModel].color }}>
                     {cvFolds[activeModel].mean[k]}
@@ -219,9 +220,9 @@ export default function ModelPerformanceTable() {
         <div className="overflow-x-auto">
           <table className="w-full text-[11px] min-w-[440px]">
             <thead>
-              <tr className="border-b border-[hsl(217,32%,17%)]">
+              <tr className="border-b border-border">
                 {['Risk Class', 'Precision', 'Recall', 'F1-Score', 'Support'].map((h) => (
-                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-[hsl(215,20%,50%)] uppercase tracking-wider">
+                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                     {h}
                   </th>
                 ))}
@@ -229,39 +230,19 @@ export default function ModelPerformanceTable() {
             </thead>
             <tbody>
               {perClassData[activeModel].classes.map((cls) => {
-                const riskColor =
-                  cls.name === 'No Risk' ? 'hsl(142,71%,55%)' :
-                  cls.name === 'Low Risk' ? 'hsl(199,89%,58%)' :
-                  cls.name === 'Medium Risk' ? 'hsl(38,92%,55%)' :
-                  'hsl(0,84%,65%)';
+                const riskColor = '#6b7280';
                 return (
-                  <tr key={cls.name} className="border-b border-[hsl(217,32%,13%)] hover:bg-[hsl(217,32%,11%)] transition-colors">
+                  <tr key={cls.name} className="border-b border-muted/20 hover:bg-muted transition-colors">
                     <td className="py-2.5 px-2">
                       <span className="font-mono text-[11px] font-medium" style={{ color: riskColor }}>{cls.name}</span>
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(210,40%,80%)]">{cls.precision.toFixed(2)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(210,40%,80%)]">{cls.recall.toFixed(2)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums font-semibold text-[hsl(210,40%,90%)]">{cls.f1.toFixed(2)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,55%)]">{cls.support.toLocaleString()}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">{cls.precision.toFixed(2)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">{cls.recall.toFixed(2)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">{cls.f1.toFixed(2)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-muted-foreground">{cls.support.toLocaleString()}</td>
                   </tr>
                 );
               })}
-              {/* Macro Avg */}
-              <tr className="border-b border-[hsl(217,32%,17%)] bg-[hsl(217,32%,11%)]">
-                <td className="py-2 px-2 font-mono text-[10px] text-[hsl(215,20%,50%)] uppercase tracking-wider">Macro Avg</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,60%)]">{perClassData[activeModel].macroAvg.precision.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,60%)]">{perClassData[activeModel].macroAvg.recall.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,60%)]">{perClassData[activeModel].macroAvg.f1.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,50%)]">{perClassData[activeModel].macroAvg.support.toLocaleString()}</td>
-              </tr>
-              {/* Weighted Avg */}
-              <tr style={{ background: `${perClassData[activeModel].color}08` }}>
-                <td className="py-2 px-2 font-mono text-[10px] uppercase tracking-wider" style={{ color: perClassData[activeModel].color }}>Weighted Avg</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums font-semibold" style={{ color: perClassData[activeModel].color }}>{perClassData[activeModel].weightedAvg.precision.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums font-semibold" style={{ color: perClassData[activeModel].color }}>{perClassData[activeModel].weightedAvg.recall.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums font-semibold" style={{ color: perClassData[activeModel].color }}>{perClassData[activeModel].weightedAvg.f1.toFixed(2)}</td>
-                <td className="py-2 px-2 text-right font-mono tabular-nums" style={{ color: perClassData[activeModel].color }}>{perClassData[activeModel].weightedAvg.support.toLocaleString()}</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -272,9 +253,9 @@ export default function ModelPerformanceTable() {
         <div className="overflow-x-auto">
           <table className="w-full text-[11px] min-w-[500px]">
             <thead>
-              <tr className="border-b border-[hsl(217,32%,17%)]">
+              <tr className="border-b border-border">
                 {['Model', 'Metric', 'Point Est.', 'CI Lower', 'CI Upper', 'CI Width'].map((h) => (
-                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-[hsl(215,20%,50%)] uppercase tracking-wider">
+                  <th key={h} className="text-right first:text-left py-2 px-2 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                     {h}
                   </th>
                 ))}
@@ -283,7 +264,7 @@ export default function ModelPerformanceTable() {
             <tbody>
               {bootstrapData.map((m) =>
                 m.metrics.map((row, ri) => (
-                  <tr key={`${m.model}-${row.metric}`} className="border-b border-[hsl(217,32%,13%)] hover:bg-[hsl(217,32%,11%)] transition-colors">
+                  <tr key={`${m.model}-${row.metric}`} className="border-b border-muted/20 hover:bg-muted transition-colors">
                     <td className="py-2.5 px-2">
                       {ri === 0 ? (
                         <div className="flex items-center gap-1.5">
@@ -291,20 +272,20 @@ export default function ModelPerformanceTable() {
                           <span className="font-mono font-medium text-[11px]" style={{ color: m.color }}>{m.model}</span>
                         </div>
                       ) : (
-                        <span className="text-[hsl(215,20%,30%)]">—</span>
+                        <span className="text-muted-foreground/50">—</span>
                       )}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-[hsl(215,20%,65%)]">{row.metric}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums font-semibold text-[hsl(210,40%,90%)]">{row.point.toFixed(4)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(142,71%,55%)]">{row.ciLower.toFixed(4)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(142,71%,55%)]">{row.ciUpper.toFixed(4)}</td>
-                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-[hsl(215,20%,55%)]">{row.ciWidth.toFixed(4)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono text-muted-foreground">{row.metric}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums  text-foreground">{row.point.toFixed(4)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">{row.ciLower.toFixed(4)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-foreground">{row.ciUpper.toFixed(4)}</td>
+                    <td className="py-2.5 px-2 text-right font-mono tabular-nums text-muted-foreground">{row.ciWidth.toFixed(4)}</td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-          <p className="mt-3 text-[10px] font-mono text-[hsl(215,20%,40%)]">
+          <p className="mt-3 text-[10px] font-mono text-muted-foreground">
             95% bootstrap confidence intervals · 1000 bootstrap iterations
           </p>
         </div>
@@ -312,17 +293,17 @@ export default function ModelPerformanceTable() {
 
       {/* Footer info */}
       <div className="mt-4 grid grid-cols-2 gap-3">
-        <div className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
-          <p className="text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider mb-1">
+        <div className="p-3 rounded-lg bg-muted border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">
             Evaluation Method
           </p>
-          <p className="text-[12px] text-[hsl(210,40%,80%)]">5-Fold Temporal Cross-Validation</p>
+          <p className="text-[12px] text-foreground">5-Fold Temporal Cross-Validation</p>
         </div>
-        <div className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
-          <p className="text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider mb-1">
+        <div className="p-3 rounded-lg bg-muted border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">
             Study Period
           </p>
-          <p className="text-[12px] text-[hsl(210,40%,80%)]">2009–2023 (15 years)</p>
+          <p className="text-[12px] text-foreground">2009–2023 (15 years)</p>
         </div>
       </div>
     </div>

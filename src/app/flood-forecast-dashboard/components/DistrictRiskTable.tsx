@@ -28,9 +28,9 @@ const districts: District[] = [
   { sn: 14, district: 'Rukum West',     province: 'Karnali', riskLevel: 'Moderate', riskScore: 43, keyFloodHazardZones: 'Mahakali tributaries; Surnaya river channel' },
 ];
 
-function RiskBadge({ level }: { level: 'High' | 'Moderate' }) {
+function RiskBadge({ level }: { level: 'High' | 'Moderate' | 'VeryHigh' }) {
   const styles =
-    level === 'High' ?'bg-[hsl(0,84%,60%)]/10 text-[hsl(0,84%,65%)] border border-[hsl(0,84%,60%)]/30' :'bg-[hsl(38,92%,50%)]/10 text-[hsl(38,92%,60%)] border border-[hsl(38,92%,50%)]/30';
+    level === 'High' ? 'bg-[#f15619] text-white border border-muted/30' : level === 'VeryHigh' ? 'bg-[#c03a3a] text-white border border-muted/40' : 'bg-[#dbc036] text-white border border-muted/25';
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-semibold ${styles}`}>
       {level}
@@ -39,15 +39,9 @@ function RiskBadge({ level }: { level: 'High' | 'Moderate' }) {
 }
 
 function ScoreBar({ score }: { score: number }) {
-  const color = score >= 65 ? 'hsl(0,84%,60%)' : 'hsl(38,92%,50%)';
+  const color = score >= 65 ? '#6b7280' : '#9ca3af';
   return (
     <div className="flex items-center gap-2">
-      <div className="flex-1 h-1.5 rounded-full bg-[hsl(217,32%,17%)] overflow-hidden min-w-[50px]">
-        <div
-          className="h-full rounded-full transition-all duration-300"
-          style={{ width: `${score}%`, background: color, opacity: 0.8 }}
-        />
-      </div>
       <span className="font-mono tabular-nums text-[12px] font-semibold" style={{ color }}>
         {score}
       </span>
@@ -63,22 +57,21 @@ export default function DistrictRiskTable() {
   const filtered = filter === 'All' ? districts : districts.filter((d) => d.riskLevel === filter);
 
   return (
-    <div className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <ShieldAlert size={15} className="text-[hsl(199,89%,48%)]" />
-            <h3 className="text-[14px] font-semibold text-[hsl(210,40%,96%)]">
+            <h3 className="text-[14px] font-semibold text-foreground">
               District Flood Risk Scores
             </h3>
           </div>
-          <p className="text-[11px] text-[hsl(215,20%,55%)] font-mono">
+          <p className="text-[11px] text-muted-foreground font-mono">
             Karnali River Basin · {districts.length} districts assessed
           </p>
         </div>
 
         {/* Filter */}
-        <div className="flex items-center gap-1 bg-[hsl(217,32%,11%)] rounded-lg p-1 border border-[hsl(217,32%,17%)]">
+        <div className="flex items-center gap-1 bg-muted/20 rounded-lg p-1 border border-border">
           {(['All', 'VeryHigh', 'High', 'Moderate'] as FilterType[]).map((f) => (
             <button
               key={f}
@@ -87,18 +80,11 @@ export default function DistrictRiskTable() {
               style={
                 filter === f
                   ? {
-                      background:
-                        f === 'High' ?'hsl(0,84%,60%,0.15)'
-                          : f === 'Moderate' ?'hsl(38,92%,50%,0.15)' :'hsl(199,89%,48%,0.15)',
-                      color:
-                        f === 'High' ?'hsl(0,84%,65%)'
-                          : f === 'Moderate' ?'hsl(38,92%,60%)' :'hsl(199,89%,65%)',
-                      border: `1px solid ${
-                        f === 'High' ?'hsl(0,84%,60%,0.35)'
-                          : f === 'Moderate' ?'hsl(38,92%,50%,0.35)' :'hsl(199,89%,48%,0.35)'
-                      }`,
+                      background: '#e5e7eb',
+                      color: '#1f2937',
+                      border: '1px solid #d1d5db',
                     }
-                  : { color: 'hsl(215,20%,55%)', border: '1px solid transparent' }
+                  : { color: 'hsl(var(--color-muted-foreground))', border: '1px solid transparent' }
               }
             >
               {f}
@@ -110,20 +96,20 @@ export default function DistrictRiskTable() {
       <div className="overflow-x-auto">
         <table className="w-full text-[12px] min-w-[700px]">
           <thead>
-            <tr className="border-b border-[hsl(217,32%,20%)]">
-              <th className="text-left py-2.5 pr-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider w-10">
+            <tr className="border-b border-border">
+              <th className="text-left py-2.5 pr-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider w-10">
                 S.N
               </th>
-              <th className="text-left py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="text-left py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 District
               </th>
-              <th className="text-left py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="text-left py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 Province
               </th>
-              <th className="text-center py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="text-center py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 Risk Level
               </th>
-              <th className="text-left py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider w-44">
+              <th className="text-left py-2.5 px-3 text[10px] font-mono text-muted-foreground uppercase tracking-wider w-44">
                 Risk Score
               </th>
               
@@ -133,16 +119,16 @@ export default function DistrictRiskTable() {
             {filtered.map((row) => (
               <tr
                 key={`district-${row.sn}`}
-                className="border-b border-[hsl(217,32%,13%)] hover:bg-[hsl(217,32%,11%)] transition-colors duration-100"
+                className="border-b border-muted/20 hover:bg-muted/20 transition-colors duration-100"
               >
                 <td className="py-3 pr-3">
-                  <span className="font-mono text-[hsl(215,20%,45%)] text-[11px]">{row.sn}</span>
+                  <span className="font-mono text-muted-foreground text-[11px]">{row.sn}</span>
                 </td>
                 <td className="py-3 px-3">
-                  <span className="font-medium text-[hsl(210,40%,90%)] text-[12px]">{row.district}</span>
+                  <span className="font-mono text-muted-foreground text-[11px]">{row.district}</span>
                 </td>
                 <td className="py-3 px-3">
-                  <span className="font-mono text-[hsl(215,20%,65%)] text-[11px]">{row.province}</span>
+                  <span className="font-mono text-muted-foreground text-[11px]">{row.province}</span>
                 </td>
                 <td className="py-3 px-3 text-center">
                   <RiskBadge level={row.riskLevel} />
@@ -159,19 +145,19 @@ export default function DistrictRiskTable() {
 
       {/* Summary row */}
       <div className="mt-4 grid grid-cols-3 gap-3">
-        <div className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
-          <p className="text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider mb-1">Total Districts</p>
-          <p className="text-[20px] font-bold text-[hsl(199,89%,65%)] font-mono">{districts.length}</p>
+        <div className="p-3 rounded-lg bg-muted/20 border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Total Districts</p>
+          <p className="text-[20px] font-bold  font-mono">{districts.length}</p>
         </div>
-        <div className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
-          <p className="text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider mb-1">High Risk</p>
-          <p className="text-[20px] font-bold text-[hsl(0,84%,65%)] font-mono">
+        <div className="p-3 rounded-lg bg-muted/20 border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">High Risk</p>
+          <p className="text-[20px] font-bold font-mono">
             {districts.filter((d) => d.riskLevel === 'High').length}
           </p>
         </div>
-        <div className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
-          <p className="text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider mb-1">Moderate Risk</p>
-          <p className="text-[20px] font-bold text-[hsl(38,92%,60%)] font-mono">
+        <div className="p-3 rounded-lg bg-muted/20 border border-border">
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Moderate Risk</p>
+          <p className="text-[20px] font-bold font-mono">
             {districts.filter((d) => d.riskLevel === 'Moderate').length}
           </p>
         </div>

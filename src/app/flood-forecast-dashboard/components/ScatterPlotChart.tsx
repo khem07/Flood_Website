@@ -28,9 +28,9 @@ const scatterDataByModel = {
 };
 
 const MODEL_COLORS: Record<string, string> = {
-  rf: '#38bdf8',
-  transformer: '#f59e0b',
-  tcn: '#a78bfa',
+  rf: '#9ca3af',
+  transformer: '#6b7280',
+  tcn: '#4b5563',
 };
 
 const MODEL_LABELS: Record<string, string> = {
@@ -50,19 +50,19 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
   const err = Math.abs(d.predicted - d.observed);
   const pctErr = ((err / d.observed) * 100).toFixed(1);
   return (
-    <div className="bg-[hsl(222,40%,10%)] border border-[hsl(217,32%,22%)] rounded-xl p-3 shadow-2xl">
+    <div className="bg-card border border-border rounded-xl p-3 shadow-2xl">
       <div className="space-y-1">
         <div className="flex justify-between gap-4">
-          <span className="text-[11px] text-[hsl(215,20%,55%)]">Observed</span>
-          <span className="text-[12px] font-mono tabular-nums text-[hsl(142,71%,55%)]">{d.observed.toLocaleString()} m³/s</span>
+          <span className="text-[11px] text-muted-foreground">Observed</span>
+          <span className="text-[12px] font-mono tabular-nums text-success">{d.observed.toLocaleString()} m³/s</span>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-[11px] text-[hsl(215,20%,55%)]">Predicted</span>
-          <span className="text-[12px] font-mono tabular-nums text-[hsl(199,89%,58%)]">{d.predicted.toLocaleString()} m³/s</span>
+          <span className="text-[11px] text-muted-foreground">Predicted</span>
+          <span className="text-[12px] font-mono tabular-nums text-primary">{d.predicted.toLocaleString()} m³/s</span>
         </div>
-        <div className="flex justify-between gap-4 pt-1 border-t border-[hsl(217,32%,17%)]">
-          <span className="text-[11px] text-[hsl(215,20%,55%)]">Error</span>
-          <span className="text-[11px] font-mono tabular-nums text-[hsl(215,20%,65%)]">{err.toLocaleString()} m³/s ({pctErr}%)</span>
+        <div className="flex justify-between gap-4 pt-1 border-t border-border">
+          <span className="text-[11px] text-muted-foreground">Error</span>
+          <span className="text-[11px] font-mono tabular-nums text-muted-foreground">{err.toLocaleString()} m³/s ({pctErr}%)</span>
         </div>
       </div>
     </div>
@@ -73,21 +73,21 @@ export default function ScatterPlotChart() {
   const [activeModel, setActiveModel] = useState<keyof typeof scatterDataByModel>('transformer');
 
   return (
-    <div className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Crosshair size={15} className="text-[hsl(199,89%,48%)]" />
-            <h3 className="text-[14px] font-semibold text-[hsl(210,40%,96%)]">
+            <Crosshair size={15} className="text-primary" />
+            <h3 className="text-[14px] font-semibold text-foreground">
               Scatter Plot — Obs vs Pred
             </h3>
           </div>
-          <p className="text-[11px] text-[hsl(215,20%,55%)] font-mono">
+          <p className="text-[11px] text-muted-foreground font-mono">
             Validation period 2023–2025 · Points on 1:1 line = perfect forecast
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-[hsl(217,32%,11%)] rounded-lg p-1 border border-[hsl(217,32%,17%)]">
+        <div className="flex items-center gap-1 bg-muted/20 rounded-lg p-1 border border-border">
           {(Object.keys(scatterDataByModel) as Array<keyof typeof scatterDataByModel>).map((key) => (
             <button
               key={`scatter-tab-${key}`}
@@ -101,7 +101,7 @@ export default function ScatterPlotChart() {
                       border: `1px solid ${MODEL_COLORS[key]}40`,
                     }
                   : {
-                      color: 'hsl(215,20%,55%)',
+                      color: 'hsl(var(--color-muted-foreground))',
                     }
               }
             >
@@ -113,13 +113,13 @@ export default function ScatterPlotChart() {
 
       <ResponsiveContainer width="100%" height={260}>
         <ScatterChart margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(217,32%,16%)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--color-border))" />
           <XAxis
             dataKey="observed"
             name="Observed"
             type="number"
             domain={[0, 12000]}
-            tick={{ fill: 'hsl(215,20%,50%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
@@ -127,7 +127,7 @@ export default function ScatterPlotChart() {
               value: 'Observed (m³/s)',
               position: 'insideBottom',
               offset: -5,
-              fill: 'hsl(215,20%,45%)',
+              fill: 'hsl(var(--color-muted-foreground))',
               fontSize: 10,
             }}
           />
@@ -136,7 +136,7 @@ export default function ScatterPlotChart() {
             name="Predicted"
             type="number"
             domain={[0, 12000]}
-            tick={{ fill: 'hsl(215,20%,50%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
@@ -145,7 +145,7 @@ export default function ScatterPlotChart() {
               angle: -90,
               position: 'insideLeft',
               offset: 10,
-              fill: 'hsl(215,20%,45%)',
+              fill: 'hsl(var(--color-muted-foreground))',
               fontSize: 10,
             }}
           />
@@ -153,13 +153,13 @@ export default function ScatterPlotChart() {
           {/* 1:1 perfect line */}
           <ReferenceLine
             segment={[{ x: 0, y: 0 }, { x: 12000, y: 12000 }]}
-            stroke="hsl(215,20%,35%)"
+            stroke="hsl(var(--color-muted-foreground))"
             strokeDasharray="5 5"
             strokeWidth={1.5}
             label={{
               value: '1:1',
               position: 'insideTopLeft',
-              fill: 'hsl(215,20%,45%)',
+              fill: 'hsl(var(--color-muted-foreground))',
               fontSize: 10,
             }}
           />
@@ -187,14 +187,14 @@ export default function ScatterPlotChart() {
             value: activeModel === 'rf' ? '0.8094' : activeModel === 'transformer' ? '0.7877' : '0.8204',
           },
         ].map((s) => (
-          <div key={`scatter-stat-${s.label}`} className="text-center p-2 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
+          <div key={`scatter-stat-${s.label}`} className="text-center p-2 rounded-lg bg-muted/20 border border-border">
             <div
               className="text-[14px] font-mono font-bold tabular-nums"
               style={{ color: MODEL_COLORS[activeModel] }}
             >
               {s.value}
             </div>
-            <div className="text-[10px] text-[hsl(215,20%,50%)] mt-0.5 font-mono">{s.label}</div>
+            <div className="text-[10px] text-muted-foreground mt-0.5 font-mono">{s.label}</div>
           </div>
         ))}
       </div>

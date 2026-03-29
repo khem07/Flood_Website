@@ -58,16 +58,16 @@ const forecastRows = [
 type ModelKey = 'rf' | 'transformer' | 'tcn';
 
 const MODEL_META: Record<ModelKey, { label: string; color: string }> = {
-  rf:          { label: 'Random Forest', color: '#38bdf8' },
-  transformer: { label: 'Transformer',   color: '#f59e0b' },
-  tcn:         { label: 'TCN',           color: '#a78bfa' },
+  rf:          { label: 'Random Forest', color: '#4b5563' },
+  transformer: { label: 'Transformer',   color: '#4b5563' },
+  tcn:         { label: 'TCN',           color: '#4b5563' },
 };
 
 function ProbBar({ value, color }: { value: number; color: string }) {
   const pct = Math.min(value * 100, 100);
   return (
     <div className="flex items-center gap-2">
-      <div className="flex-1 h-1.5 rounded-full bg-[hsl(217,32%,17%)] overflow-hidden min-w-[40px]">
+      <div className="flex-1 h-1.5 rounded-full bg-muted/10 overflow-hidden min-w-[40px]">
         <div
           className="h-full rounded-full transition-all duration-300"
           style={{ width: `${pct}%`, background: color, opacity: 0.75 }}
@@ -83,22 +83,22 @@ export default function ForecastTable() {
   const modelData = MODEL_META[activeModel];
 
   return (
-    <div className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Table2 size={15} className="text-[hsl(199,89%,48%)]" />
-            <h3 className="text-[14px] font-semibold text-[hsl(210,40%,96%)]">
+            <Table2 size={15} className="text-primary" />
+            <h3 className="text-[14px] font-semibold text-foreground">
               7-Day Flood Probability Forecast
             </h3>
           </div>
-          <p className="text-[11px] text-[hsl(215,20%,55%)] font-mono">
+          <p className="text-[11px] text-muted-foreground font-mono">
             Flood probability with 95% confidence intervals · All lead days: No Risk
           </p>
         </div>
 
         {/* Model selector */}
-        <div className="flex items-center gap-1 bg-[hsl(217,32%,11%)] rounded-lg p-1 border border-[hsl(217,32%,17%)]">
+        <div className="flex items-center gap-1 bg-muted/20 rounded-lg p-1 border border-border">
           {(Object.keys(MODEL_META) as ModelKey[]).map((key) => (
             <button
               key={key}
@@ -107,7 +107,7 @@ export default function ForecastTable() {
               style={
                 activeModel === key
                   ? { background: `${MODEL_META[key].color}20`, color: MODEL_META[key].color, border: `1px solid ${MODEL_META[key].color}40` }
-                  : { color: 'hsl(215,20%,55%)', border: '1px solid transparent' }
+                  : { color: 'hsl(var(--color-muted-foreground))', border: '1px solid transparent' }
               }
             >
               {MODEL_META[key].label}
@@ -119,20 +119,20 @@ export default function ForecastTable() {
       <div className="overflow-x-auto">
         <table className="w-full text-[12px] min-w-[480px]">
           <thead>
-            <tr className="border-b border-[hsl(217,32%,20%)]">
-              <th className="text-left py-2.5 pr-4 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+            <tr className="border-b border-border">
+              <th className="text-left py-2.5 pr-4 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 Lead Day
               </th>
               <th className="text-right py-2.5 px-3 text-[10px] font-mono uppercase tracking-wider" style={{ color: modelData.color }}>
                 Flood Probability
               </th>
-              <th className="text-right py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="text-right py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 CI Lower
               </th>
-              <th className="text-right py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="text-right py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 CI Upper
               </th>
-              <th className="py-2.5 px-3 text-[10px] font-mono text-[hsl(215,20%,45%)] uppercase tracking-wider">
+              <th className="py-2.5 px-3 text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                 Probability Bar
               </th>
             </tr>
@@ -143,25 +143,25 @@ export default function ForecastTable() {
               return (
                 <tr
                   key={row.id}
-                  className="border-b border-[hsl(217,32%,13%)] hover:bg-[hsl(217,32%,11%)] transition-colors duration-100"
+                  className="border-b border-muted/20 hover:bg-muted/20 transition-colors duration-100"
                 >
                   <td className="py-3 pr-4">
-                    <span className="font-mono font-medium text-[hsl(210,40%,88%)] text-[12px]">
+                    <span className="font-mono font-medium text-card-foreground text-[12px]">
                       {row.leadDay}
                     </span>
                   </td>
                   <td className="py-3 px-3 text-right">
-                    <span className="font-mono tabular-nums font-semibold text-[13px]" style={{ color: modelData.color }}>
+                    <span className="font-mono tabular-nums text-[12px]" style={{ color: modelData.color }}>
                       {m.prob.toFixed(3)}
                     </span>
                   </td>
                   <td className="py-3 px-3 text-right">
-                    <span className="font-mono tabular-nums text-[12px] text-[hsl(215,20%,60%)]">
+                    <span className="font-mono tabular-nums text-[12px] text-muted-foreground">
                       {m.ciLower.toFixed(3)}
                     </span>
                   </td>
                   <td className="py-3 px-3 text-right">
-                    <span className="font-mono tabular-nums text-[12px] text-[hsl(215,20%,60%)]">
+                    <span className="font-mono tabular-nums text-[12px] text-muted-foreground">
                       {m.ciUpper.toFixed(3)}
                     </span>
                   </td>
@@ -181,7 +181,7 @@ export default function ForecastTable() {
           const maxProb = Math.max(...forecastRows.map((r) => r[key].prob));
           const minProb = Math.min(...forecastRows.map((r) => r[key].prob));
           return (
-            <div key={key} className="p-3 rounded-lg bg-[hsl(217,32%,11%)] border border-[hsl(217,32%,17%)]">
+            <div key={key} className="p-3 rounded-lg bg-muted/20 border border-border">
               <div className="flex items-center gap-1.5 mb-2">
                 <span className="w-2 h-2 rounded-sm" style={{ background: MODEL_META[key].color }} />
                 <span className="text-[11px] font-mono font-medium" style={{ color: MODEL_META[key].color }}>
@@ -190,16 +190,16 @@ export default function ForecastTable() {
               </div>
               <div className="space-y-0.5">
                 <div className="flex justify-between text-[10px] font-mono">
-                  <span className="text-[hsl(215,20%,50%)]">Max Prob</span>
-                  <span className="tabular-nums text-[hsl(210,40%,75%)]">{maxProb.toFixed(3)}</span>
+                  <span className="text-muted-foreground">Max Prob</span>
+                  <span className="tabular-nums text-card-foreground">{maxProb.toFixed(3)}</span>
                 </div>
                 <div className="flex justify-between text-[10px] font-mono">
-                  <span className="text-[hsl(215,20%,50%)]">Min Prob</span>
-                  <span className="tabular-nums text-[hsl(210,40%,75%)]">{minProb.toFixed(3)}</span>
+                  <span className="text-muted-foreground">Min Prob</span>
+                  <span className="tabular-nums text-card-foreground">{minProb.toFixed(3)}</span>
                 </div>
                 <div className="flex justify-between text-[10px] font-mono">
-                  <span className="text-[hsl(215,20%,50%)]">Risk</span>
-                  <span className="text-[hsl(142,71%,55%)]">No Risk</span>
+                  <span className="text-muted-foreground">Risk</span>
+                  <span className="text-success">No Risk</span>
                 </div>
               </div>
             </div>

@@ -23,10 +23,10 @@ const THRESHOLDS = {
 };
 
 const MODEL_COLORS = {
-  rf: '#38bdf8',
-  transformer: '#f59e0b',
-  tcn: '#a78bfa',
-  observed: '#34d399',
+  rf: '#9ca3af',
+  transformer: '#6b7280',
+  tcn: '#4b5563',
+  observed: '#a1aab8',
 };
 
 const MODEL_LABELS = {
@@ -46,8 +46,8 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload || !payload.length) return null;
 
   return (
-    <div className="bg-[hsl(222,40%,10%)] border border-[hsl(217,32%,22%)] rounded-xl p-3 shadow-2xl min-w-[200px]">
-      <p className="text-[12px] font-mono text-[hsl(215,20%,55%)] mb-2 border-b border-[hsl(217,32%,17%)] pb-2">
+    <div className="bg-card border border-border rounded-xl p-3 shadow-2xl min-w-[200px]">
+      <p className="text-[12px] font-mono text-muted-foreground mb-2 border-b border-border pb-2">
         {label}
       </p>
       {payload.map((entry) => (
@@ -60,24 +60,24 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
               className="w-2 h-2 rounded-full flex-shrink-0"
               style={{ background: entry.color }}
             />
-            <span className="text-[11px] text-[hsl(215,20%,65%)]">
+            <span className="text-[11px] text-muted-foreground">
               {MODEL_LABELS[entry.name as keyof typeof MODEL_LABELS] || entry.name}
             </span>
           </div>
-          <span className="text-[12px] font-mono font-semibold tabular-nums text-[hsl(210,40%,92%)]">
+          <span className="text-[12px] font-mono font-semibold tabular-nums text-foreground">
             {entry.value != null ? `${entry.value.toLocaleString()} ` : '—'}
           </span>
         </div>
       ))}
-      <div className="mt-2 pt-2 border-t border-[hsl(217,32%,17%)]">
+      <div className="mt-2 pt-2 border-t border-border">
         {payload[0]?.value > THRESHOLDS.danger ? (
-          <span className="text-[10px] font-mono text-[hsl(0,84%,60%)]">⚠ Above danger threshold</span>
+          <span className="text-[10px] font-mono text-destructive">⚠ Above danger threshold</span>
         ) : payload[0]?.value > THRESHOLDS.warning ? (
-          <span className="text-[10px] font-mono text-[hsl(38,92%,55%)]">⚠ Above warning threshold</span>
+          <span className="text-[10px] font-mono text-warning">⚠ Above warning threshold</span>
         ) : payload[0]?.value > THRESHOLDS.watch ? (
-          <span className="text-[10px] font-mono text-[hsl(38,92%,65%)]">Watch threshold exceeded</span>
+          <span className="text-[10px] font-mono text-warning">Watch threshold exceeded</span>
         ) : (
-          <span className="text-[10px] font-mono text-[hsl(142,71%,55%)]">Below watch threshold</span>
+          <span className="text-[10px] font-mono text-success">Below watch threshold</span>
         )}
       </div>
     </div>
@@ -99,17 +99,17 @@ export default function ForecastChart() {
   return (
     <div
       id="forecast"
-      className="rounded-xl border border-[hsl(217,32%,17%)] bg-[hsl(222,40%,9%)] p-5"
+      className="rounded-xl border border-border bg-card p-5"
     >
       <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <TrendingUp size={16} className="text-[hsl(199,89%,48%)]" />
-            <h2 className="text-[15px] font-semibold text-[hsl(210,40%,96%)]">
-              7-Day Flood Discharge Forecast
+            <TrendingUp size={16} className="text-primary" />
+            <h2 className="text-[15px] font-semibold text-foreground">
+              7-Day Flood Forecast
             </h2>
           </div>
-          {/* <p className="text-[12px] text-[hsl(215,20%,55%)]">
+          {/* <p className="text-[12px] text-muted-foreground">
             Karnali River at Chisapani · 28 Mar – 03 Apr 2026 · Discharge in m³/s
           </p> */}
         </div>
@@ -142,10 +142,10 @@ export default function ForecastChart() {
       {/* Threshold legend */}
       {/* <div className="flex flex-wrap gap-3 mb-4">
         {[
-          { label: 'Watch (3,000)', color: '#fbbf24' },
-          { label: 'Warning (4,000)', color: '#f97316' },
-          { label: 'Danger (5,000)', color: '#ef4444' },
-          { label: 'Extreme (6,500)', color: '#dc2626' },
+          { label: 'Watch (3,000)', color: '#e5e7eb' },
+          { label: 'Warning (4,000)', color: '#d1d5db' },
+          { label: 'Danger (5,000)', color: '#9ca3af' },
+          { label: 'Extreme (6,500)', color: '#6b7280' },
         ].map((t) => (
           <div key={`thresh-${t.label}`} className="flex items-center gap-1.5">
             <div
@@ -163,31 +163,31 @@ export default function ForecastChart() {
         <AreaChart data={forecastData} margin={{ top: 10, right: 20, left: 10, bottom: 0 }}>
           <defs>
             <linearGradient id="rfGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#9ca3af" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#9ca3af" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="transformerGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#f59e0b" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#6b7280" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#6b7280" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="tcnGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#a78bfa" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#a78bfa" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#4b5563" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#4b5563" stopOpacity={0.02} />
             </linearGradient>
             <linearGradient id="obsGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#34d399" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#34d399" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#a1aab8" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#a1aab8" stopOpacity={0.02} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(217,32%,17%)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--color-border))" />
           <XAxis
             dataKey="day"
-            tick={{ fill: 'hsl(215,20%,55%)', fontSize: 11, fontFamily: 'IBM Plex Mono' }}
-            axisLine={{ stroke: 'hsl(217,32%,22%)' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 11, fontFamily: 'IBM Plex Mono' }}
+            axisLine={{ stroke: 'hsl(var(--color-border))' }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: 'hsl(215,20%,55%)', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
+            tick={{ fill: 'hsl(var(--color-muted-foreground))', fontSize: 10, fontFamily: 'IBM Plex Mono' }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => `${(v)}`}
@@ -197,28 +197,28 @@ export default function ForecastChart() {
 
           <ReferenceLine
             y={THRESHOLDS.watch}
-            stroke="#fbbf24"
+            stroke="#e5e7eb"
             strokeDasharray="4 4"
             strokeWidth={1.5}
             strokeOpacity={0.7}
           />
           <ReferenceLine
             y={THRESHOLDS.warning}
-            stroke="#f97316"
+            stroke="#d1d5db"
             strokeDasharray="4 4"
             strokeWidth={1.5}
             strokeOpacity={0.7}
           />
           <ReferenceLine
             y={THRESHOLDS.danger}
-            stroke="#ef4444"
+            stroke="#9ca3af"
             strokeDasharray="4 4"
             strokeWidth={1.5}
             strokeOpacity={0.8}
           />
           <ReferenceLine
             y={THRESHOLDS.extreme}
-            stroke="#dc2626"
+            stroke="#6b7280"
             strokeDasharray="4 4"
             strokeWidth={1}
             strokeOpacity={0.5}
@@ -228,10 +228,10 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="observed"
-              stroke="#34d399"
+              stroke="#a1aab8"
               strokeWidth={2.5}
               fill="url(#obsGrad)"
-              dot={{ fill: '#34d399', r: 4, strokeWidth: 0 }}
+              dot={{ fill: '#a1aab8', r: 4, strokeWidth: 0 }}
               connectNulls={false}
             />
           )}
@@ -239,7 +239,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="rf"
-              stroke="#38bdf8"
+              stroke="#9ca3af"
               strokeWidth={2}
               fill="url(#rfGrad)"
               strokeDasharray="6 3"
@@ -250,7 +250,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="transformer"
-              stroke="#f59e0b"
+              stroke="#6b7280"
               strokeWidth={2}
               fill="url(#transformerGrad)"
               dot={false}
@@ -260,7 +260,7 @@ export default function ForecastChart() {
             <Area
               type="monotone"
               dataKey="tcn"
-              stroke="#a78bfa"
+              stroke="#4b5563"
               strokeWidth={2}
               fill="url(#tcnGrad)"
               strokeDasharray="3 3"
@@ -271,14 +271,14 @@ export default function ForecastChart() {
           <Brush
             dataKey="day"
             height={24}
-            stroke="hsl(217,32%,22%)"
-            fill="hsl(222,40%,9%)"
+            stroke="hsl(var(--color-border))"
+            fill="hsl(var(--color-card))"
             travellerWidth={6}
           />
         </AreaChart>
       </ResponsiveContainer>
 
-      <div className="mt-3 flex items-center gap-1.5 text-[11px] text-[hsl(215,20%,45%)]">
+      <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
         <Info size={11} />
         <span className="font-mono">
           Day 0 shows current observed discharge. Forecast begins Day 1. Transformer model predicts highest peak on Day 4.
